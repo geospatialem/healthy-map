@@ -1,5 +1,7 @@
 var map, featureList, POISearch = [];
 
+$('#sidebar').hide();
+
 $(document).on("click", ".feature-row", function(e) {
   sidebarClick(parseInt($(this).attr("id"), 10));
 });
@@ -59,6 +61,23 @@ function sidebarClick(id) {
   }
 }
 
+function highlightFeature(e) {
+    var layer = e.target;    
+    layer.setStyle({
+        weight: 4,
+        color: '#333',
+        dashArray: '' 
+    });
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+}
+
+//Removes the style when not hovering over the County
+function resetHighlightCounty(e) { 		
+	district8.resetStyle(e.target);
+}
+
 /* Basemap Layers */
 var mbAttr = 	'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 				'<a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -88,10 +107,10 @@ var highlight = L.geoJson(null);
 //Set the fill color for the Precinct based on the Precinct number
 function getFillColor(PrecinctID) {
 	return 	PrecinctID > 271370315 ?  '#000' :
-			PrecinctID > 271370272  ? '#238B45' : //Duluth city
-			PrecinctID > 271370230  ? '#66C2A4' :
-			PrecinctID > 271370187  ? '#B2E2E2' :
-			PrecinctID > 271370145  ? '#EDF8FB' :
+			PrecinctID > 271370272  ? '#662506' :
+			PrecinctID > 271370230  ? '#CC4C02' :
+			PrecinctID > 271370187  ? '#FE9929' :
+			PrecinctID > 271370145  ? '#FEE391' :
 								 	  '#FFF';
 }
 
@@ -108,6 +127,27 @@ var district8 = L.geoJson(null, {
 	      clickable: true
 	    };
 	  },
+	  onEachFeature: function (feature, layer) {
+		  layer.on({
+			  mouseover: highlightFeature,
+			  mouseout: resetHighlightCounty
+		  });				  		
+		    if (feature.properties) {
+		    	var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Precinct</th><td>" + feature.properties.Precinct + "</td></tr>" + "<tr><th>Precinct ID</th><td>" + feature.properties.PrecinctID + "</td></tr>"  + "<table>";    	layer.on({
+		        click: function (e) {
+		          $("#feature-title").html(feature.properties.Precinct);
+		          $("#feature-info").html(content);
+		          $("#featureModal").modal("show");
+		          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], {
+		            stroke: false,
+		            fillColor: "#00FFFF",
+		            fillOpacity: 0.7,
+		            radius: 10
+		          }));
+		        }
+		      });
+		    }
+		  }
 	});
 	$.getJSON("data/CDistrict8.json", function (data) {
 	  district8.addData(data);
