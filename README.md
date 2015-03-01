@@ -1,4 +1,4 @@
-<a href="http://geospatialem.github.io/conference-map/">Healthy Map Template</a>
+<a href="http://geospatialem.github.io/healthy-map/">Healthy Map Template</a>
 ==============
 
 A proposed template design for mapping health and non-health data together. In particular to see points, such as weather stations, and polygons, such as aggregated health data, overlayed on one map together.
