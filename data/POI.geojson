@@ -1,0 +1,38 @@
+{
+"type": "FeatureCollection",                                                                          
+"features": [
+{ "type": "Feature", "id": 0, "properties": { "NAME": "Holiday Inn Hotel & Suites", "ADDRESS": "200 West First Street" }, "geometry": { "type": "Point", "coordinates": [ -92.102067, 46.785076 ] } }
+,
+{ "type": "Feature", "id": 1, "properties": { "NAME": "The Inn on Lake Superior", "ADDRESS": "350 Canal Park Drive" }, "geometry": { "type": "Point", "coordinates": [ -92.093390, 46.783051 ] } }
+,
+{ "type": "Feature", "id": 2, "properties": { "NAME": "Duluth Entertainment Convention Center (DECC)", "ADDRESS": "350 Harbor Drive" }, "geometry": { "type": "Point", "coordinates": [ -92.097675, 46.781194 ] } }
+,
+{ "type": "Feature", "id": 3, "properties": { "NAME": "Duluth Grill", "ADDRESS": "118 S 27th Ave W" }, "geometry": { "type": "Point", "coordinates": [ -92.130050, 46.760614 ] } }
+,
+{ "type": "Feature", "id": 4, "properties": { "NAME": "Northern Waters Smokehaus", "ADDRESS": "394 Lake Avenue South, Suite 106" }, "geometry": { "type": "Point", "coordinates": [ -92.094636, 46.781948 ] } }
+,
+{ "type": "Feature", "id": 5, "properties": { "NAME": "Canal Park Brewing Company", "ADDRESS": "300 Canal Park Drive" }, "geometry": { "type": "Point", "coordinates": [ -92.093830, 46.784832 ] } }
+,
+{ "type": "Feature", "id": 6, "properties": { "NAME": "Fitgers Brewhouse Brewery", "ADDRESS": "600 E Superior St" }, "geometry": { "type": "Point", "coordinates": [ -92.090600, 46.792376 ] } }
+,
+{ "type": "Feature", "id": 7, "properties": { "NAME": "Aerial Lift Bridge", "ADDRESS": "601 S Lake Ave" }, "geometry": { "type": "Point", "coordinates": [ -92.093058, 46.779232 ] } }
+,
+{ "type": "Feature", "id": 8, "properties": { "NAME": "Enger Park and Tower", "ADDRESS": "16th Ave W & Skyline Drive" }, "geometry": { "type": "Point", "coordinates": [ -92.125000, 46.776097 ] } }
+,
+{ "type": "Feature", "id": 9, "properties": { "NAME": "Leif Erickson Park & Rose Garden", "ADDRESS": "12th Ave E & London Road" }, "geometry": { "type": "Point", "coordinates": [ -92.080993, 46.797795 ] } }
+,
+{ "type": "Feature", "id": 10, "properties": { "NAME": "Glensheen Estate", "ADDRESS": "3300 London Rd" }, "geometry": { "type": "Point", "coordinates": [ -92.051791 , 46.815161 ] } }
+,
+{ "type": "Feature", "id": 11, "properties": { "NAME": "Lake Superior Maritime Visitor Center", "ADDRESS": "600 S Lake Ave" }, "geometry": { "type": "Point", "coordinates": [ -92.092425, 46.779825 ] } }
+,
+{ "type": "Feature", "id": 12, "properties": { "NAME": "Lake Superior Railroad Museum", "ADDRESS": "506 W Michigan St" }, "geometry": { "type": "Point", "coordinates": [ -92.103879, 46.781702 ] } }
+,
+{ "type": "Feature", "id": 13, "properties": { "NAME": "Spirit Mountain", "ADDRESS": "9500 Spirit Mountain Pl" }, "geometry": { "type": "Point", "coordinates": [ -92.217740, 46.720187 ] } }
+,
+{ "type": "Feature", "id":14, "properties": { "NAME": "Great Lakes Aquarium", "ADDRESS": "353 Harbor Dr" }, "geometry": { "type": "Point", "coordinates": [ -92.100309, 46.779278 ] } }
+,
+{ "type": "Feature", "id": 15, "properties": { "NAME": "Lake Superior Zoo", "ADDRESS": "7210 Fremont St" }, "geometry": { "type": "Point", "coordinates": [ -92.190494, 46.725798 ] } }
+,
+{ "type": "Feature", "id": 16, "properties": { "NAME": "Radisson Duluth Harbor View", "ADDRESS": "505 West Superior Street" }, "geometry": { "type": "Point", "coordinates": [ -92.105311, 46.781947 ] } }
+]
+}
