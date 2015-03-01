@@ -138,12 +138,6 @@ var district8 = L.geoJson(null, {
 		          $("#feature-title").html(feature.properties.Precinct);
 		          $("#feature-info").html(content);
 		          $("#featureModal").modal("show");
-		          highlight.clearLayers().addLayer(L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], {
-		            stroke: false,
-		            fillColor: "#00FFFF",
-		            fillOpacity: 0.7,
-		            radius: 10
-		          }));
 		        }
 		      });
 		    }
