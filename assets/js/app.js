@@ -302,7 +302,7 @@ if (document.body.clientWidth <= 767) {
 var baseLayers = {
   "Street Map": streets,
   "Aerial Imagery": satellite,
-  "Gray": hybrid
+  "Hybrid": hybrid
 };
 
 var groupedOverlays = {
