@@ -79,27 +79,26 @@ function resetHighlightCounty(e) {
 }
 
 /* Basemap Layers */
-var mbAttr = 	'Map data &copy; <a target="_blank" href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a target="_blank" href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery &copy; <a target="_blank" href="http://mapbox.com">Mapbox</a>',
-	mbUrl = 	'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png';
+var streets = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
+	  maxZoom: 19,
+	  subdomains: ["otile1", "otile2", "otile3", "otile4"],
+	  attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+});
 
-var grayscale = L.tileLayer(mbUrl, {id: 'examples.map-20v6611k', 	attribution: mbAttr}),
-	streets = 	L.tileLayer(mbUrl, {id: 'examples.map-i875mjb7',	attribution: mbAttr});
-	satellite = L.tileLayer(mbUrl, {id: 'examples.map-igb471ik',	attribution: mbAttr});
-	
-	/*Accessible Basemaps*/
-	grayscale.on('tileload', function (tileEvent) {
-	    tileEvent.tile.setAttribute('alt', 'Map tile image');
-	});
-	
-	streets.on('tileload', function (tileEvent) {
-		tileEvent.tile.setAttribute('alt', 'Map tile image');
-	});
-	
-	satellite.on('tileload', function (tileEvent) {
-		tileEvent.tile.setAttribute('alt', 'Map tile image');		    
-	});    
+var satellite = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
+	  maxZoom: 18,
+	  subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
+	  attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+});
+
+var hybrid = L.layerGroup([L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
+	maxZoom: 18,
+	subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"]
+}), L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/hyb/{z}/{x}/{y}.png", {
+	maxZoom: 19,
+	subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
+	attribution: 'Labels courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
+})]); 
 
 /* Overlay Layers */
 var highlight = L.geoJson(null);
@@ -212,7 +211,7 @@ var southWest = L.latLng(43.05, -97.77),
 map = L.map("map", {
   zoom: 11,
   center: [46.7830,-92.1005],
-  layers: [grayscale, district8, markerClusters, highlight],
+  layers: [streets, district8, markerClusters, highlight],
   maxBounds: bounds,
   zoomControl: false,
   attributionControl: false
@@ -301,9 +300,9 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-  "Gray": grayscale,
   "Street Map": streets,
-  "Aerial Imagery": satellite
+  "Aerial Imagery": satellite,
+  "Gray": hybrid
 };
 
 var groupedOverlays = {
