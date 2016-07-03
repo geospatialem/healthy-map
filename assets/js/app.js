@@ -1,4 +1,4 @@
-var map, featureList, POISearch = [];
+var map, featureList, POISearch = [], mqStreetBasemap = MQ.mapLayer();
 
 $('#sidebar').hide();
 
@@ -190,7 +190,7 @@ var southWest = L.latLng(43.05, -97.77),
 map = L.map("map", {
   zoom: 11,
   center: [46.7830,-92.1005],
-  layers: [MQ.mapLayer(), district8, markerClusters, highlight],
+  layers: [mqStreetBasemap, district8, markerClusters, highlight],
   maxBounds: bounds,
   zoomControl: false,
   attributionControl: false
@@ -268,7 +268,7 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-  "Street Map": MQ.mapLayer(),
+  "Street Map": mqStreetBasemap,
   "Aerial Imagery": MQ.satelliteLayer(),
   "Hybrid": MQ.hybridLayer(),
   "Dark": MQ.darkLayer(),
