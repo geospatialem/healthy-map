@@ -62,11 +62,11 @@ function sidebarClick(id) {
 }
 
 function highlightFeature(e) {
-    var layer = e.target;    
+    var layer = e.target;
     layer.setStyle({
         weight: 4,
         color: '#333',
-        dashArray: '' 
+        dashArray: ''
     });
     if (!L.Browser.ie && !L.Browser.opera) {
         layer.bringToFront();
@@ -74,31 +74,9 @@ function highlightFeature(e) {
 }
 
 //Removes the style when not hovering over the County
-function resetHighlightCounty(e) { 		
+function resetHighlightCounty(e) {
 	district8.resetStyle(e.target);
 }
-
-/* Basemap Layers */
-var streets = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png", {
-	  maxZoom: 19,
-	  subdomains: ["otile1", "otile2", "otile3", "otile4"],
-	  attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
-});
-
-var satellite = L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
-	  maxZoom: 18,
-	  subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
-	  attribution: 'Tiles courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
-});
-
-var hybrid = L.layerGroup([L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg", {
-	maxZoom: 18,
-	subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"]
-}), L.tileLayer("http://{s}.mqcdn.com/tiles/1.0.0/hyb/{z}/{x}/{y}.png", {
-	maxZoom: 19,
-	subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
-	attribution: 'Labels courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency'
-})]); 
 
 /* Overlay Layers */
 var highlight = L.geoJson(null);
@@ -130,7 +108,7 @@ var district8 = L.geoJson(null, {
 		  layer.on({
 			  mouseover: highlightFeature,
 			  mouseout: resetHighlightCounty
-		  });				  		
+		  });
 		    if (feature.properties) {
 		    	var content = "<table class='table table-striped table-bordered table-condensed'>" + "<tr><th>Precinct</th><td>" + feature.properties.Precinct + "</td></tr>" + "<tr><th>Precinct ID</th><td>" + feature.properties.PrecinctID + "</td></tr>"  + "<table>";    	layer.on({
 		        click: function (e) {
@@ -148,9 +126,9 @@ var district8 = L.geoJson(null, {
 
 
 var POIMarker = L.AwesomeMarkers.icon({ // POI Symbology
-	icon: 'star', 
-	prefix: 'fa', 
-	markerColor: 'cadetblue', 
+	icon: 'star',
+	prefix: 'fa',
+	markerColor: 'cadetblue',
 	});
 
 
@@ -208,10 +186,11 @@ var southWest = L.latLng(43.05, -97.77),
 	northEast = L.latLng(49.61, -89.35),
 	bounds = L.latLngBounds(southWest, northEast);
 
+
 map = L.map("map", {
   zoom: 11,
   center: [46.7830,-92.1005],
-  layers: [streets, district8, markerClusters, highlight],
+  layers: [MQ.mapLayer(), district8, markerClusters, highlight],
   maxBounds: bounds,
   zoomControl: false,
   attributionControl: false
@@ -234,17 +213,6 @@ map.on("overlayremove", function(e) {
 map.on("click", function(e) {
   highlight.clearLayers();
 });
-
-/* Attribution control */
-function updateAttribution(e) {
-  $.each(map._layers, function(index, layer) {
-    if (layer.getAttribution) {
-      $("#attribution").html((layer.getAttribution()));
-    }
-  });
-}
-map.on("layeradd", updateAttribution);
-map.on("layerremove", updateAttribution);
 
 var attributionControl = L.control({
   position: "bottomright"
@@ -300,9 +268,11 @@ if (document.body.clientWidth <= 767) {
 }
 
 var baseLayers = {
-  "Street Map": streets,
-  "Aerial Imagery": satellite,
-  "Hybrid": hybrid
+  "Street Map": MQ.mapLayer(),
+  "Aerial Imagery": MQ.satelliteLayer(),
+  "Hybrid": MQ.hybridLayer(),
+  "Dark": MQ.darkLayer(),
+  "Light": MQ.lightLayer()
 };
 
 var groupedOverlays = {
@@ -315,7 +285,7 @@ var groupedOverlays = {
 };
 
 var options = { exclusiveGroups: [""],
-		collapsed: isCollapsed 
+		collapsed: isCollapsed
 };
 
 var layerControl = L.control.groupedLayers(baseLayers, groupedOverlays, options, {
@@ -340,7 +310,7 @@ $(document).one("ajaxStop", function () {
   $("#loading").hide();
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
-  
+
   var POIBH = new Bloodhound({
 	    name: "POI",
 	    datumTokenizer: function (d) {
