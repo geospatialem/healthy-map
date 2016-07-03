@@ -64,7 +64,9 @@ input[type="radio"], input[type="checkbox"] { margin: 0; }
 
 .awesome-marker i { font-size: 14px; margin-top: 12px; }
 
+/* Attribution */
 .mq-attribution-control { display: none; }
+.mq-logo-control.leaflet-control { display: none; }
 
 @media (min-width: 800px) {
   button.sidebar-toggle {display:none;}
